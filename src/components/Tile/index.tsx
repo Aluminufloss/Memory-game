@@ -49,7 +49,7 @@ const StyledTile = styled.li<{
 
     transform: ${(props) =>
       props.$revealed ? "rotateY(180deg)" : "rotateY(0)"};
-    }
+  }
 
   .tile-front {
     ${(props) => props.theme.typography.fnSemiBold};
@@ -89,6 +89,5 @@ const StyledTile = styled.li<{
     transform: rotateY(180deg);
   }
 `;
-
 
 export default Tile;

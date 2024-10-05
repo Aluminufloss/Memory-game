@@ -22,6 +22,8 @@ const Board: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const gameState = useSelector((state: RootState) => state.game);
 
+  const [isInitRender, setIsInitRender] = useState(true);
+
   const [time, setTime] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
 
@@ -48,6 +50,11 @@ const Board: React.FC = () => {
   }, [gameState.selectedTiles]);
 
   const handleTileClick = (index: number) => {
+    if (isInitRender) {
+      setIsInitRender(false);
+      return;
+    }
+
     if (
       !isLocked &&
       !gameState.selectedTiles.includes(index) &&
@@ -107,23 +114,19 @@ const StyledBoard = styled.div`
     position: relative;
 
     display: grid;
-    grid-template-columns: repeat(4, minmax(120px, 1fr));
-    grid-template-rows: repeat(4, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, minmax(110px, 1fr));
+    grid-template-rows: repeat(4, minmax(130px, 1fr));
     gap: 20px;
   }
 
   ${media.desktop} {
-    padding: 24px 32px;
-
     .board {
       grid-template-columns: repeat(4, minmax(70px, 1fr));
-      grid-template-rows: repeat(4, minmax(110px, 1fr));
-
-      gap: 16px;
     }
   }
 
   ${media.mobile} {
+    width: 100%;
     padding: 24px 20px;
 
     .board {
